@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
+import puppeteer, { Browser } from "puppeteer";
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -18,8 +18,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing HTML content' }, { status: 400 });
   }
 
-  let browser: puppeteer.Browser | null = null;
-
+  let browser: Browser | null = null;
   try {
     browser = await puppeteer.launch({
       headless: true,
